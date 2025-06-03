@@ -1,0 +1,92 @@
+# 示例配置文件
+# 是否启用AI语义推断
+enableAiInference: true
+
+# 生成数据的默认行数
+defaultRowCount: 100
+
+# AI模型配置
+aiModelConfig:
+  modelType: BERT
+  modelPath: ""
+  usePretrainedModel: true
+  inferenceTimeout: 5000
+
+# 排除生成的字段列表
+excludeFields:
+  - created_by
+  - updated_by
+
+# 字段配置映射
+fieldConfigs:
+  # 用户ID字段配置
+  id:
+    type: INT
+    min: "1"
+    max: "1000000"
+    allowNull: false
+  
+  # 用户名字段配置
+  username:
+    type: STRING
+    minLength: 5
+    maxLength: 20
+    allowNull: false
+    pattern: "^[a-zA-Z0-9_]+$"
+  
+  # 邮箱字段配置
+  email:
+    type: STRING
+    allowNull: false
+    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
+  
+  # 年龄字段配置
+  age:
+    type: INT
+    min: "18"
+    max: "80"
+    allowNull: true
+    nullRate: 0.1
+    distributionType: NORMAL
+  
+  # 性别字段配置
+  gender:
+    type: STRING
+    enumValues:
+      - "男"
+      - "女"
+      - "未知"
+    allowNull: true
+    nullRate: 0.05
+  
+  # 创建时间字段配置
+  created_time:
+    type: DATETIME
+    min: "2020-01-01T00:00:00"
+    max: "2023-12-31T23:59:59"
+    allowNull: false
+  
+  # 余额字段配置
+  balance:
+    type: DECIMAL
+    min: "0"
+    max: "100000"
+    allowNull: false
+    distributionType: EXPONENTIAL
+  
+  # 状态字段配置
+  status:
+    type: INT
+    enumValues:
+      - "0"
+      - "1"
+      - "2"
+    allowNull: false
+  
+  # 地址字段配置
+  address:
+    type: STRING
+    minLength: 10
+    maxLength: 200
+    allowNull: true
+    nullRate: 0.2 
